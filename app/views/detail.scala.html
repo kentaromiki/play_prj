@@ -1,0 +1,15 @@
+@(message: String, item:models.Item)
+
+@import play.i18n._
+
+
+@main("Actor Detail") {
+
+<h1>detail</h1>
+<h1>@(item.id)</h1>
+<h1>@(item.title)</h1>
+<h1>@(item.detail)</h1>
+<h1>@(item.money)yen</h1>
+
+<a href="/item/edit/@(item.id)">edit</a>
+}

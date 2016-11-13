@@ -1,0 +1,88 @@
+@*
+ * This template takes a single argument, a String containing a
+ * message to display.
+ *@
+@(message: String, itemForm: Form[views.form.itemform],item:models.Item)
+
+@import helper._
+
+@*
+ * Call the `main` template with two arguments. The first
+ * argument is a `String` with the title of the page, the second
+ * argument is an `Html` object containing the body of the page.
+ *@
+@main("Welcome to Play") {
+
+
+
+
+    <h1>hello world</h1>
+    <h1>@message</h1>
+    
+      <div class="row">
+      <div class="col-md-12">
+        <form class="form-horizontal" role="form" action="/create/@message" method="post">
+          
+         <div>ああああ</div>
+          
+           <!-- title -->
+           
+           @item.id
+          <div class="form-group">
+            @defining(itemForm("id")) { idField =>
+            <label for="idField.id" class="col-sm-2 control-label">id</label>
+            <div class="col-sm-10">
+            
+              <input type="hidden" id="@idField.id" class="form-control" name="@idField.name" value="@item.id">
+              
+            </div>
+            }
+          </div>
+          
+          
+          <!-- title -->
+          <div class="form-group">
+            @defining(itemForm("title")) { titleField =>
+            <label for="titleField.id" class="col-sm-2 control-label">title</label>
+            <div class="col-sm-10">
+              <input type="text" id="@titleField.id" class="form-control" name="@titleField.name" value="@item.title">
+              
+            </div>
+            }
+          </div>
+          
+          <!-- detail -->
+          <div class="form-group">
+            @defining(itemForm("detail")) { detailField =>
+            <label for="detailField.id" class="col-sm-2 control-label">detail</label>
+            <div class="col-sm-10">
+              <textarea type="text" id="@detailField.id" class="form-control" name="@detailField.name" >@item.detail
+              </textarea>
+            </div>
+            }
+          </div>
+    
+    	 <!-- money -->
+          <div class="form-group">
+            @defining(itemForm("money")) { moneyField =>
+            <label for="moneyField.id" class="col-sm-2 control-label">money</label>
+            <div class="col-sm-10">
+              <input type="number" id="@moneyField.id" class="form-control" name="@moneyField.name" value="@item.money">
+              
+            </div>
+            }
+          </div>
+    
+    
+    
+    
+          <div class="form-group">
+            <input class="btn btn-default" type="submit" value="save" />
+          </div>
+        </form>
+      </div>
+    </div>
+    
+      <h1>upload Here</h1>
+    
+}

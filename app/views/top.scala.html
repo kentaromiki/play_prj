@@ -1,0 +1,51 @@
+@(message: String, result: List[models.Item])
+
+@import java.util.Date
+@import play.i18n._
+
+
+
+@main("Welcome to Play") {
+
+
+@headder()
+
+
+<link rel="shortcut icon" type="image/jpg" href="@routes.Assets.versioned("images/sam (1).jpg")">
+
+     <div class="row">
+      <div class="col-md-12">
+      @if(result.isEmpty()) {
+<div>空です</div>
+} 
+        
+         
+            @for(item <- result) {
+           
+            <div  class="goods">
+            <div class=imageIcon>
+             <a class="btn btn-default" href="/item/detail/@item.id">
+<img src="/assets/images/sam (@item.id).jpg" alt="サンプル" width="100px" height="100px">
+</a>
+               
+                <a class="btn btn-default" href="/item/detail/@item.id">@item.id</a>
+              </div>
+             
+              <div class="goodsName hidden">@item.title</div>
+              
+              </div>
+               @item.id
+              @item.detail
+              
+              
+                <a class="btn btn-default" href="/item/delete/@item.id">delete</a>
+              
+           
+            }
+         
+      </div>
+    </div>
+    <a class="btn btn-default" href="/create">create</a>
+    
+   
+}
