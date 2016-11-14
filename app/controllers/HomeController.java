@@ -129,6 +129,7 @@ public class HomeController extends Controller {
  
  
  @SuppressWarnings("deprecation")
+ 
 public Result upload() {
 	 MultipartFormData<File> body = request().body().asMultipartFormData();
 	    FilePart<File> picture = body.getFile("picture");
@@ -136,6 +137,9 @@ public Result upload() {
 	    	String fileName = picture.getFilename();
 	        String contentType = picture.getContentType();
 	        File file = picture.getFile();
+	        
+	        String myUploadPath = "C:/Users/main/Documents/play_prj/public/images/" ;
+            file.renameTo(new File(myUploadPath, fileName));
 	        
 	     
 	      return ok("File uploaded"+file);

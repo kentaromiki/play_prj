@@ -16,7 +16,12 @@ POST   /upload                     controllers.HomeController.upload
 POST   /create/save                controllers.HomeController.save
 POST   /create/update              controllers.HomeController.update
 
-
+POST    /product                   controllers.ProductController.insert
+PUT     /product/:id                controllers.ProductController.update(id: Long)
+DELETE  /product/:id                controllers.ProductController.delete(id: Long)
+GET     /product/:id                controllers.ProductController.select(id: Long)
+GET     /product                    controllers.ProductController.selectAll
+POST     /product/upload             controllers.ProductController.upload
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
