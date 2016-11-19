@@ -11,17 +11,17 @@ GET     /item/edit/:id              controllers.HomeController.edit(id: Long)
 
 GET     /item/delete/:id              controllers.HomeController.delete(id: Long)
 
-POST   /upload                     controllers.HomeController.upload
+POST   /uploaded                     controllers.HomeController.uploaded
 
 POST   /create/save                controllers.HomeController.save
 POST   /create/update              controllers.HomeController.update
 
-POST    /product                   controllers.ProductController.insert
-PUT     /product/:id                controllers.ProductController.update(id: Long)
-DELETE  /product/:id                controllers.ProductController.delete(id: Long)
-GET     /product/:id                controllers.ProductController.select(id: Long)
-GET     /product                    controllers.ProductController.selectAll
-POST     /product/upload             controllers.ProductController.upload
+POST    /item                    controllers.ItemController.insert
+PUT     /item/:id                controllers.ItemController.update(id: Long)
+DELETE  /item/:id                controllers.ItemController.delete(id: Long)
+GET     /item/:id                controllers.ItemController.select(id: Long)
+GET     /item                    controllers.ItemController.selectAll
+POST    /upload/:id                  controllers.ItemController.upload(id: Long)
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count

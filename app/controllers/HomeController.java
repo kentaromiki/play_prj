@@ -130,7 +130,7 @@ public class HomeController extends Controller {
  
  @SuppressWarnings("deprecation")
  
-public Result upload() {
+public Result uploaded() {
 	 MultipartFormData<File> body = request().body().asMultipartFormData();
 	    FilePart<File> picture = body.getFile("picture");
 	    if (picture != null) {

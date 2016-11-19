@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-
+import play.api.data.validation.ValidationError;
 import play.i18n.Messages;
 
 public class itemform {
@@ -33,14 +33,16 @@ public class itemform {
 //  public List<ValidationError> validate() {
 //
 //    List<ValidationError> errors = new ArrayList<ValidationError>();
-
-//    if (name == null || name.length() == 0) {
-//      errors.add(new ValidationError("name", Messages.get("actor.name.required")));
+//
+//    
+//    if (title == null || title.length() == 0) {
+//      errors.add(new ValidationError("title", "not title" ));
 //    }
 //    if (StringUtils.isNotEmpty(title)) {
 //      Integer tmpH = Integer.valueOf(title);
 //      if (tmpH < 1 && tmpH > 200) {
 //        errors.add(new ValidationError("title", Messages.get("actor.title.range", 1, 200)));
+//        
 //      }
 //    }
 //    if (StringUtils.isNotEmpty(detail) && !detail.matches("A|B|AB|O")) {
