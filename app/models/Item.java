@@ -21,6 +21,8 @@ import views.form.itemform;
 
 import com.avaje.ebean.Model;
 
+import play.data.validation.Constraints.Required;
+
 
 
 @Entity(name = "item")
@@ -32,12 +34,22 @@ public class Item extends Model {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   public Long id;
 
-  
+  //@NotNull(message="必須入力です")
+  //@Size(min = 1, max = 4 ,message="必須入力です")
   public String title;
+  
+  //@NotNull
+  //@Size(min = 1, max = 300)
   public String detail;
+  
+  //@NotNull
+  //@Size(min = 1, max = 20)
   public Integer money;
+  
+ 
   public String image_url;
 
+  
 
   public Item() {
   }

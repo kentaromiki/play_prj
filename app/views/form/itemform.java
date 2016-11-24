@@ -30,10 +30,11 @@ public class itemform {
     this.imageUrl = imageUrl;
   }
 
-//  public List<ValidationError> validate() {
-//
-//    List<ValidationError> errors = new ArrayList<ValidationError>();
-//
+  public List<ValidationError> validate() {
+
+    List<ValidationError> errors = new ArrayList<ValidationError>();
+
+    
 //    
 //    if (title == null || title.length() == 0) {
 //      errors.add(new ValidationError("title", "not title" ));
@@ -62,9 +63,9 @@ public class itemform {
 //      System.out.println("ActorForm#validate errors");
 //      return errors;
 //    }
-//
-//    return null;
-//  }
+
+    return errors;
+  }
 
   @Override
   public String toString() {

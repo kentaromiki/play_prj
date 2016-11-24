@@ -11,8 +11,11 @@ import java.io.File;
 import java.util.List;
 
 import javax.validation.Valid;
-import play.data.validation.*;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
+
+import play.data.validation.*;
+import play.data.validation.Constraints.Validator;
 import views.html.*;
 
 import models.UserMaster;
@@ -59,11 +62,41 @@ public class ItemController extends Controller {
 		Item item = Json.fromJson(request().body().asJson(), Item.class);
 		// item.title="axd";
 		
-
-		item.save();
+		
+		String error="";
+		
+		//abc(item,error);
+		
+		if(item.title == null) {
+	        error+="Not Title ";
+	        
+	    } 
+		else if(item.title.length()>=4){
+	    	error+="Too longer Title ";
+	    
+	    }
+	    if(item.detail == null) {
+	        error+="Not detail ";
+	        
+	    } 
+	    else if(item.detail.length()>=200){
+	    	error+="Too longer detail ";
+	    
+	    }
+	    if(error!=""){
+	    	return badRequest(error);
+	    	
+//	        
+	    }else{
+	        item.save();
+	        return ok("Hello " + item.title);
+	        
+	    }
+		
+		
 		
 
-		return ok("ok");
+		
 	}
 
 	public Result delete(Long id) {
@@ -110,4 +143,13 @@ public class ItemController extends Controller {
 		return ok("ok");
 	}
 
+	public void abc(Item item,String error){
+		
+		
+		if(item.title==null||item.title==""){
+			error+="No title";
+			
+		}
+		
+	}
 }
