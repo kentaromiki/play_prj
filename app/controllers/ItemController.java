@@ -71,7 +71,7 @@ public class ItemController extends Controller {
 	        error+="Not Title ";
 	        
 	    } 
-		else if(item.title.length()>=4){
+		else if(item.title.length()>=20){
 	    	error+="Too longer Title ";
 	    
 	    }
@@ -89,7 +89,7 @@ public class ItemController extends Controller {
 //	        
 	    }else{
 	        item.save();
-	        return ok("Hello " + item.title);
+	        return ok("insert finished");
 	        
 	    }
 		
@@ -104,7 +104,7 @@ public class ItemController extends Controller {
 		
 		Item item = Item.finder.byId(id);
 		item.delete();
-		return ok("ok");
+		return ok("delete finished");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -138,9 +138,37 @@ public class ItemController extends Controller {
 		item.detail = newItem.detail;
 		item.money = newItem.money;
 
-		item.save();
-
-		return ok("ok");
+		
+String error="";
+		
+		//abc(item,error);
+		
+		if(item.title == null) {
+	        error+="Not Title ";
+	        
+	    } 
+		else if(item.title.length()>=20){
+	    	error+="Too longer Title ";
+	    
+	    }
+	    if(item.detail == null) {
+	        error+="Not detail ";
+	        
+	    } 
+	    else if(item.detail.length()>=200){
+	    	error+="Too longer detail ";
+	    
+	    }
+	    if(error!=""){
+	    	return badRequest(error);
+	    	
+//	        
+	    }else{
+	        item.save();
+	        return ok("update finished");
+	        
+	    }
+		
 	}
 
 	public void abc(Item item,String error){

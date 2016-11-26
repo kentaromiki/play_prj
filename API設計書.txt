@@ -1,0 +1,39 @@
+APIê›åvèë
+
+POST /item { "title":"abc","detail": " baride ", "money": 3000600}  return "insert finished"
+POST /item { "title":"","detail": " baride ", "money": 3000600}     return "not title"
+
+PUT /item/2 { "title":"abc","detail": " baride ", "money": 3000600}  return "update finished"
+
+GET /item  
+return 
+[
+{
+"id": 1,
+"title": "shoose",
+"detail": "cool",
+"money": 1000,
+"image_url": null
+},
+{
+"id": 2,
+"title": "newtitlew",
+"detail": " newdetail ",
+"money": 1230,
+"image_url": null
+}
+]
+
+GET /item/2
+return 
+{
+"id": 2,
+"title": "newtitlew",
+"detail": " newdetail ",
+"money": 1230,
+"image_url": null
+}
+]
+
+DELETE /item/2  return "delete finished"
+

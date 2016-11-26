@@ -3,18 +3,6 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                           controllers.HomeController.index
-GET     /create                     controllers.HomeController.create
-GET     /top                        controllers.HomeController.top
-GET     /item/detail/:id            controllers.HomeController.detail(id: Long)
-GET     /item/edit/:id              controllers.HomeController.edit(id: Long)
-
-GET     /item/delete/:id              controllers.HomeController.delete(id: Long)
-
-POST   /uploaded                     controllers.HomeController.uploaded
-
-POST   /create/save                controllers.HomeController.save
-POST   /create/update              controllers.HomeController.update
 
 POST    /item                    controllers.ItemController.insert
 PUT     /item/:id                controllers.ItemController.update(id: Long)
