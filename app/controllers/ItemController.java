@@ -41,6 +41,7 @@ public class ItemController extends Controller {
 	 * path of <code>/</code>.
 	 */
 
+	//指定した一つの商品を表示
 	public Result select(Long id) {
 		Item item = Item.finder.byId(id);
 
@@ -48,6 +49,7 @@ public class ItemController extends Controller {
 
 	}
 
+	//全商品一覧表示
 	public Result selectAll() {
 
 		List<Item> item = Item.finder.all();
@@ -55,60 +57,51 @@ public class ItemController extends Controller {
 
 	}
 
+	//商品登録
 	public Result insert() {
-		// Item item = Item.finder.byId(id);
-		// render(item);
-
+		
 		Item item = Json.fromJson(request().body().asJson(), Item.class);
-		// item.title="axd";
-		
-		
-		String error="";
-		
-		//abc(item,error);
-		
-		if(item.title == null) {
-	        error+="Not Title ";
-	        
-	    } 
-		else if(item.title.length()>=20){
-	    	error+="Too longer Title ";
-	    
-	    }
-	    if(item.detail == null) {
-	        error+="Not detail ";
-	        
-	    } 
-	    else if(item.detail.length()>=200){
-	    	error+="Too longer detail ";
-	    
-	    }
-	    if(error!=""){
-	    	return badRequest(error);
-	    	
-//	        
-	    }else{
-	        item.save();
-	        return ok("insert finished");
-	        
-	    }
-		
-		
-		
+		String error = "";
+
 
 		
+		//バリデーション
+		if (item.title == null) {
+			error += "Not Title ";
+
+		} else if (item.title.length() >= 20) {
+			error += "Too longer Title ";
+
+		}
+		if (item.detail == null) {
+			error += "Not detail ";
+
+		} else if (item.detail.length() >= 200) {
+			error += "Too longer detail ";
+
+		}
+		if (error != "") {
+			return badRequest(error);
+
+			//
+		} else {
+			item.save();
+			return ok("insert finished");
+
+		}
+
 	}
 
+	//商品削除
 	public Result delete(Long id) {
 
-		
 		Item item = Item.finder.byId(id);
 		item.delete();
 		return ok("delete finished");
 	}
 
+	//画像アップロード
 	@SuppressWarnings("deprecation")
-
 	public Result upload(Long id) {
 		MultipartFormData<File> body = request().body().asMultipartFormData();
 		FilePart<File> picture = body.getFile("picture");
@@ -128,56 +121,44 @@ public class ItemController extends Controller {
 		}
 	}
 
+	//商品情報の更新
 	public Result update(Long id) {
-		// Item item = Item.finder.byId(id);
-		// render(item);
+		
 		Item item = Item.finder.byId(id);
 		Item newItem = Json.fromJson(request().body().asJson(), Item.class);
-		// item.title="axd";
 		item.title = newItem.title;
 		item.detail = newItem.detail;
 		item.money = newItem.money;
 
-		
-String error="";
-		
-		//abc(item,error);
-		
-		if(item.title == null) {
-	        error+="Not Title ";
-	        
-	    } 
-		else if(item.title.length()>=20){
-	    	error+="Too longer Title ";
-	    
-	    }
-	    if(item.detail == null) {
-	        error+="Not detail ";
-	        
-	    } 
-	    else if(item.detail.length()>=200){
-	    	error+="Too longer detail ";
-	    
-	    }
-	    if(error!=""){
-	    	return badRequest(error);
-	    	
-//	        
-	    }else{
-	        item.save();
-	        return ok("update finished");
-	        
-	    }
-		
+		String error = "";
+
+
+		//更新時のバリデーション
+		if (item.title == null) {
+			error += "Not Title ";
+
+		} else if (item.title.length() >= 20) {
+			error += "Too longer Title ";
+
+		}
+		if (item.detail == null) {
+			error += "Not detail ";
+
+		} else if (item.detail.length() >= 200) {
+			error += "Too longer detail ";
+
+		}
+		if (error != "") {
+			return badRequest(error);
+
+			//
+		} else {
+			item.save();
+			return ok("update finished");
+
+		}
+
 	}
 
-	public void abc(Item item,String error){
-		
-		
-		if(item.title==null||item.title==""){
-			error+="No title";
-			
-		}
-		
-	}
+	
 }

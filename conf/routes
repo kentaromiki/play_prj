@@ -4,12 +4,13 @@
 
 # An example controller showing a sample home page
 
-POST    /item                    controllers.ItemController.insert
+
+POST    /item                	 controllers.ItemController.insert
 PUT     /item/:id                controllers.ItemController.update(id: Long)
-DELETE  /item/:id                controllers.ItemController.delete(id: Long)
+DELETE  /item/:id            	 controllers.ItemController.delete(id: Long)
 GET     /item/:id                controllers.ItemController.select(id: Long)
 GET     /item                    controllers.ItemController.selectAll
-POST    /upload/:id                  controllers.ItemController.upload(id: Long)
+POST    /upload/:id              controllers.ItemController.upload(id: Long)
 
 # An example controller showing how to use dependency injection
 GET     /count                      controllers.CountController.count
