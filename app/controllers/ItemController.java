@@ -41,7 +41,8 @@ public class ItemController extends Controller {
 	 * path of <code>/</code>.
 	 */
 
-	//指定した一つの商品を表示
+	// 指定した一つの商品を表示
+	@Valid
 	public Result select(Long id) {
 		Item item = Item.finder.byId(id);
 
@@ -49,7 +50,7 @@ public class ItemController extends Controller {
 
 	}
 
-	//全商品一覧表示
+	// 全商品一覧表示
 	public Result selectAll() {
 
 		List<Item> item = Item.finder.all();
@@ -57,50 +58,36 @@ public class ItemController extends Controller {
 
 	}
 
-	//商品登録
+	// 商品登録
 	public Result insert() {
-		
+
 		Item item = Json.fromJson(request().body().asJson(), Item.class);
-		String error = "";
-
-
 		
-		//バリデーション
-		if (item.title == null) {
-			error += "Not Title ";
 
-		} else if (item.title.length() >= 20) {
-			error += "Too longer Title ";
+		String error=itemValide(item);
 
-		}
-		if (item.detail == null) {
-			error += "Not detail ";
+		if (itemValide(item) != "") {
 
-		} else if (item.detail.length() >= 200) {
-			error += "Too longer detail ";
-
-		}
-		if (error != "") {
 			return badRequest(error);
 
 			//
 		} else {
 			item.save();
-			return ok("insert finished");
+			return ok("message=セーブが完了しました");
 
 		}
 
 	}
 
-	//商品削除
+	// 商品削除
 	public Result delete(Long id) {
 
 		Item item = Item.finder.byId(id);
 		item.delete();
-		return ok("delete finished");
+		return ok("message=削除が完了しました");
 	}
 
-	//画像アップロード
+	// 画像アップロード
 	@SuppressWarnings("deprecation")
 	public Result upload(Long id) {
 		MultipartFormData<File> body = request().body().asMultipartFormData();
@@ -117,48 +104,72 @@ public class ItemController extends Controller {
 			return ok("File uploaded " + fileName2);
 		} else {
 			flash("error", "Missing file");
-			return ok("faild upload");
+			return ok("message=画像のアップロードが完了しました");
 		}
 	}
 
-	//商品情報の更新
+	// 商品情報の更新
 	public Result update(Long id) {
-		
+
 		Item item = Item.finder.byId(id);
 		Item newItem = Json.fromJson(request().body().asJson(), Item.class);
 		item.title = newItem.title;
 		item.detail = newItem.detail;
 		item.money = newItem.money;
 
-		String error = "";
+		String error=itemValide(item);
 
+		if (itemValide(item) != "") {
 
-		//更新時のバリデーション
-		if (item.title == null) {
-			error += "Not Title ";
-
-		} else if (item.title.length() >= 20) {
-			error += "Too longer Title ";
-
-		}
-		if (item.detail == null) {
-			error += "Not detail ";
-
-		} else if (item.detail.length() >= 200) {
-			error += "Too longer detail ";
-
-		}
-		if (error != "") {
 			return badRequest(error);
 
 			//
 		} else {
 			item.save();
-			return ok("update finished");
+			return ok("message=更新が完了しました");
+
+		}
+		
+
+	}
+	
+	String itemValide(Item item){
+		
+		String error = "";
+
+		// バリデーション
+		if (item.title == null||item.detail.length() < 1) {
+			error += "titleError=タイトルを入力してください";
+
+		} else if (item.title.length() >= 20) {
+			error += "titleError=タイトルを20文字以内にしてください";
 
 		}
 
+		if (item.detail == null||item.detail.length() < 1) {
+
+			if (error != "") {
+				error += ",";
+			}
+			error += "detailError=説明文を入力してください";
+
+		} else if (item.detail.length() >= 200) {
+
+			if (error != "") {
+				error += ",";
+			}
+			error += "detailError=説明文は200文字以内にしてください";
+
+		}
+
+		if (error != "") {
+
+			error="{"+error+"}";
+			return error;
+		}
+		
+	
+		return error;
 	}
 
-	
 }
